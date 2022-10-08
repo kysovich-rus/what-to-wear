@@ -4,6 +4,7 @@ class ClothesCollection
   attr_accessor :items
 
   def self.read_from_dir(dir_path)
+    items =
     Dir["#{dir_path}/*.txt"].map do |path|
       lines = File.readlines(path, encoding: 'UTF-8', chomp: true)
       temp_range = lines[2].scan(/[+-]?\d+/)
@@ -14,6 +15,7 @@ class ClothesCollection
         max_temp: temp_range[1].to_i
       )
     end
+    ClothesCollection.new(items)
   end
 
   def initialize(items = [])

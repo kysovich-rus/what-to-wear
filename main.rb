@@ -1,8 +1,7 @@
 require_relative 'lib/clothes_collection'
 require_relative 'lib/clothing'
 
-collection = ClothesCollection.new
-collection.items = ClothesCollection.read_from_dir("#{File.dirname(__FILE__)}/data")
+collection = ClothesCollection.read_from_dir("#{File.dirname(__FILE__)}/data")
 
 print 'Введите температуру: '
 temp = $stdin.gets.to_i
