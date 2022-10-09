@@ -70,17 +70,18 @@ RSpec.describe 'ClothesCollection' do
       }
     end
 
-    it 'creates Clothing instances for every read .txt file' do
-      # ожидаем, что прочитанная из файлов коллекция будет такой же, как и заданная в тестах выше
-      expect(ClothesCollection.read_from_dir(path).sample).to be_a Clothing
-      expect(ClothesCollection.read_from_dir(path).count).to eq 3
+    it 'creates ClothesCollection instance' do
+      expect(ClothesCollection.read_from_dir(path)).to be_a ClothesCollection
     end
 
-    it 'creates Clothing instances with expected variables' do
-      expect(ClothesCollection.read_from_dir(path).map(&:name)).to match_array expected[:name]
-      expect(ClothesCollection.read_from_dir(path).map(&:type)).to match_array expected[:type]
-      expect(ClothesCollection.read_from_dir(path).map(&:min_temp)).to match_array expected[:min_temp]
-      expect(ClothesCollection.read_from_dir(path).map(&:max_temp)).to match_array expected[:max_temp]
+    let(:new_collection) { ClothesCollection.read_from_dir(path) }
+
+    it 'Collection items contain Clothing instances with expected variables' do
+      expect(new_collection.items.count).to eq 3
+      expect(new_collection.items.map(&:name)).to match_array expected[:name]
+      expect(new_collection.items.map(&:type)).to match_array expected[:type]
+      expect(new_collection.items.map(&:min_temp)).to match_array expected[:min_temp]
+      expect(new_collection.items.map(&:max_temp)).to match_array expected[:max_temp]
     end
   end
 end
